@@ -1,0 +1,63 @@
+****版本一	
+	step1:启动服务,通过浏览器查看首页是否能够正常显示
+	step2:修改index.html
+		2.1 在index.html页面中
+			class = "menu inco-memu"节点上添加ng-click属性调用toggle();
+		2.2 在scripts文件夹下新建
+			app.js ->js程序的入口
+			2.2.1 编写app.js
+				a. 新建模块yike
+				b. 在模块跟作用域上绑定toggle方法
+		2.3 在index.html页面中
+			body添加ng-app
+			引入angular和app.js
+	step3:计划实现导航的隐藏和显示功能 - 写在toggle中
+		分析 导航栏的显示其实就是将左侧导航和内容区域中的头部和主体一起向右移动，而本身的css中有一个类collapse可以将节点内容右移
+			->点击图片将三个节点添加collapse类
+	step4:将左侧导航的内容从模型层获取
+		4.1 新建一个contraller.js ->控制器模块 用来管理所有的控制器
+			新建控制器模块 angula.module("Contros",[]);
+		4.2 在app.js中在yike模块中添加依赖Contros模块
+		4.3 在controller.js中创建NavContro,在对应的$scope中模拟导航栏数据
+		4.4 在index.html引入contraller.js,
+		4.5 在index.html中的navs下的dl节点添加ng-controller="NavContro"
+		4.6 在index.html中的navs下的dd节点添加ng-repeat="nav in navs"遍历所有navs,取对应的属性
+		4.7 只给导航栏中的第一个dd添加active class属性
+			dd ng-class="{active:true}"
+
+****版本二
+	step1: 点击侧边导航栏，导航栏收起
+		在导航栏的每个节点的a上添加ng-click="toggle()"
+	step2: 抠出today.html的视图 放在views中
+		并在index.html的body中写明占位符
+	step3: 在app.js中配置路由
+		3.1 简单测试
+			a. 写config 通过$routeProvider.when
+			b. 在yike应用模块写ngRoute的依赖
+			c. 在index.html中引入angular-route.js
+		3.2 获取数据
+			a. 跨域问题:修改
+
+			将ssl前的注释放开 -> 重启服务
+			b. 控制器中向php发送请求，php再向官网发送请求
+			c. $http回调函数从现在开始改成使用then
+				{"":"","data":{最终的数据对象}}
+	step4: 获取真实数据 解析填入today.html
+		编写today.html发现该页面有三种li结构
+		li
+			span.tag
+			div.cont
+				h3
+				div.brief
+				从此处开始有三种结构分支
+				1. 	p.only 			10001
+				2. 	p 				10002
+					div.thumb
+						img
+				3.  div.gallrey 	10003
+						img
+	step5: ...
+
+
+
+
